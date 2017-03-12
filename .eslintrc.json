@@ -1,0 +1,8 @@
+{
+  "extends": "eslint-config-ggc",
+  "globals": {
+    "Bella": true,
+    "chrome": true,
+    "doc": true
+  }
+}

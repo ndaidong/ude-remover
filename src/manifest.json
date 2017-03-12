@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "UDERemover",
+  "description": "To remove the unwanted DOM elements",
+  "version": "0.1",
+  "icons": {
+    "256":"images/icon.png",
+    "128":"images/icon.png",
+    "64":"images/icon.png",
+    "32":"images/icon.png",
+    "16":"images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "No mission here",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": [
+      "vendor/js/bella.js",
+      "vendor/js/doc.js",
+      "js/store.js",
+      "js/init.js"
+    ] 
+  }],
+  "offline_enabled": true,
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "unlimitedStorage"
+  ]
+}
