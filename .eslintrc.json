@@ -1,8 +1,14 @@
 {
   "extends": "eslint-config-ggc",
   "globals": {
-    "Bella": true,
     "chrome": true,
-    "doc": true
+    "bella": true,
+    "realdom": true,
+    "store": true,
+    "blocker": true,
+    "util": true
+  },
+  "rules": {
+    "no-console": 0
   }
 }
