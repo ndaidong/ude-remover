@@ -10,6 +10,13 @@
     "32":"images/icon.png",
     "16":"images/icon.png"
   },
+  "background": {
+    "scripts": [
+      "js/store.js",
+      "js/util.js",
+      "js/background.js"
+    ]
+  },
   "browser_action": {
     "default_icon": "images/icon.png",
     "default_title": "No mission here",
@@ -17,14 +24,14 @@
   },
   "content_scripts": [{
     "matches": ["<all_urls>"],
+    "run_at": "document_start",
     "js": [
       "vendor/js/bella.js",
-      "vendor/js/doc.js",
-      "js/store.js",
+      "vendor/js/realdom.js",
+      "js/remover.js",
       "js/init.js"
-    ] 
+    ]
   }],
-  "offline_enabled": true,
   "permissions": [
     "activeTab",
     "tabs",
