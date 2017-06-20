@@ -5,7 +5,7 @@
     "bella": true,
     "realdom": true,
     "store": true,
-    "blocker": true,
+    "remover": true,
     "util": true
   },
   "rules": {

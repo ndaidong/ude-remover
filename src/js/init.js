@@ -3,6 +3,6 @@ chrome.runtime.onMessage.addListener((request) => {
     patterns
   } = request;
   if (patterns) {
-    patterns.map(blocker.resolve);
+    patterns.map(remover.scan);
   }
 });

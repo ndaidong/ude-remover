@@ -1,5 +1,5 @@
 /**
- * blocker.js
+ * remover.js
  * @ndaidong
  */
 
@@ -16,17 +16,17 @@
       root[name] = factory();
     }
   }
-})('blocker', () => {
+})('remover', () => {
 
   let {queryAll} = realdom;
 
-  let resolve = (pattern) => {
+  let scan = (pattern) => {
     queryAll(pattern).map((el) => {
       return el.remove();
     });
   };
 
   return {
-    resolve
+    scan
   };
 });

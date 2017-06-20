@@ -20,7 +20,7 @@ var resolve = (tab) => {
   if (domain) {
     let patterns = getPatternsByDomain(domain);
     if (patterns && patterns.length > 0) {
-      updateIcon('Enable', 'images/icon-enabled-19.png', tab.id);
+      updateIcon('Resolved this webpage', 'images/icon-enabled-19.png', tab.id);
       sendMessage(tab.id, {
         domain,
         patterns
@@ -36,6 +36,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } = request;
   store.save(key, patterns);
   sendResponse();
+
+  chrome.tabs.query({
+    active: true,
+    currentWindow: true
+  }, (tabs) => {
+    resolve(tabs[0]);
+  });
 });
 
 chrome.tabs.onCreated.addListener(resolve);

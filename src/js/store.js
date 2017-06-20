@@ -24,18 +24,19 @@
 
   var init = () => {
     chrome.storage.sync.get(DB_NAME, (result) => {
-      console.log('result', result);
       if (result) {
-        _data = Object.assign(_data, result);
+        _data = Object.assign(_data, result[DB_NAME]);
       }
     });
   };
 
   var backup = () => {
-    chrome.storage.sync.set({
-      DB_NAME: _data
-    }, () => {
-      console.log('Settings saved');
+    let d = {};
+    d[DB_NAME] = _data;
+    chrome.storage.sync.set(d, (err) => {
+      if (err) {
+        console.log(err); // eslint-disable-line no-console
+      }
     });
   };
 

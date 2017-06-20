@@ -17,13 +17,29 @@ let $inputPatterns = get('inputPatterns');
 let $btnSubmit = get('btnSubmit');
 let $frmSave = get('frmSave');
 
+var standalize = (selectors) => {
+  return selectors.split('\n').map((line) => {
+    if (line.indexOf(' ') >= 0) {
+      return line.split(' ').map((className) => {
+        return trim(className);
+      }).filter((className) => {
+        return className !== '';
+      }).reduce((prev, curr) => {
+        return `${prev}.${curr}`;
+      }, '');
+    } else if (!line.startsWith('.') && !line.startsWith('#')) {
+      return `#${line}`;
+    }
+    return line;
+  });
+};
+
 var updatePopupWith = (url) => {
   let patterns = [];
   let domain = getDomainFromURL(url);
   if (domain) {
     patterns = getPatternsByDomain(domain);
   }
-  console.log(domain, patterns);
   $inputDomain.value = domain;
   $inputPatterns.value = patterns.join('\n');
 };
@@ -42,7 +58,10 @@ Event.on($frmSave, 'submit', (e) => {
 
   let key = $inputDomain.value;
   let selectors = trim($inputPatterns.value);
-  let patterns = selectors.length > 0 ? selectors.split('\n') : '';
+  let patterns = selectors.length > 0 ? standalize(selectors) : '';
+  if (patterns !== '') {
+    $inputPatterns.value = patterns.join('\n');
+  }
 
   chrome.runtime.sendMessage({key, patterns}, () => {
     setTimeout(enableForm, 2000);

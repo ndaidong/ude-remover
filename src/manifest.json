@@ -28,7 +28,7 @@
     "js": [
       "vendor/js/bella.js",
       "vendor/js/realdom.js",
-      "js/blocker.js",
+      "js/remover.js",
       "js/init.js"
     ]
   }],
