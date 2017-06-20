@@ -1,11 +1,11 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "name": "ude-remover",
   "description": "To remove unwanted DOM elements from any webpage",
-  "homepage": "https://chrome.google.com/webstore/detail/fasttyping/dgibeimfinglbfgimhiffmflgimlfffl",
+  "homepage": "https://chrome.google.com/webstore/detail/uderemover/gphpnjjiapfpckfphngjngioigdbfogh",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ndaidong/ude-remover"
+    "url": "https://github.com/techpush/ude-remover"
   },
   "author": "@ndaidong",
   "main": "./index.js",
@@ -30,7 +30,7 @@
     "chrome",
     "offline",
     "extension",
-    "apps",
+    "cleaner",
     "remover",
     "tool",
     "util"
