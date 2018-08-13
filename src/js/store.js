@@ -17,12 +17,11 @@
     }
   }
 })('store', () => {
-
   const DB_NAME = 'uder-data';
 
-  var _data = Object.create(null);
+  let _data = Object.create(null);
 
-  var init = () => {
+  let init = () => {
     chrome.storage.sync.get(DB_NAME, (result) => {
       if (result) {
         _data = Object.assign(_data, result[DB_NAME]);
@@ -30,7 +29,7 @@
     });
   };
 
-  var backup = () => {
+  let backup = () => {
     let d = {};
     d[DB_NAME] = _data;
     chrome.storage.sync.set(d, (err) => {
@@ -40,12 +39,12 @@
     });
   };
 
-  var save = (key, value) => {
+  let save = (key, value) => {
     _data[key] = value;
     backup();
   };
 
-  var load = (key) => {
+  let load = (key) => {
     if (!key) {
       return _data;
     }
@@ -56,6 +55,6 @@
 
   return {
     save,
-    load
+    load,
   };
 });

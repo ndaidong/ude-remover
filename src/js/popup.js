@@ -1,15 +1,15 @@
-var {
+const {
   get,
-  Event
+  Event,
 } = realdom;
 
-var {
-  trim
+const {
+  trim,
 } = bella;
 
-var {
+const {
   getDomainFromURL,
-  getPatternsByDomain
+  getPatternsByDomain,
 } = util;
 
 let $inputDomain = get('inputDomain');
@@ -17,7 +17,7 @@ let $inputPatterns = get('inputPatterns');
 let $btnSubmit = get('btnSubmit');
 let $frmSave = get('frmSave');
 
-var standalize = (selectors) => {
+const standalize = (selectors) => {
   return selectors.split('\n').map((line) => {
     if (line.indexOf(' ') >= 0) {
       return line.split(' ').map((className) => {
@@ -34,7 +34,7 @@ var standalize = (selectors) => {
   });
 };
 
-var updatePopupWith = (url) => {
+const updatePopupWith = (url) => {
   let patterns = [];
   let domain = getDomainFromURL(url);
   if (domain) {
@@ -44,11 +44,11 @@ var updatePopupWith = (url) => {
   $inputPatterns.value = patterns.join('\n');
 };
 
-var disableForm = () => {
+const disableForm = () => {
   $btnSubmit.disabled = true;
 };
 
-var enableForm = () => {
+const enableForm = () => {
   $btnSubmit.disabled = false;
 };
 
@@ -71,10 +71,10 @@ Event.on($frmSave, 'submit', (e) => {
 window.addEventListener('DOMContentLoaded', () => {
   chrome.tabs.query({
     active: true,
-    currentWindow: true
+    currentWindow: true,
   }, (tabs) => {
     let {
-      url = ''
+      url = '',
     } = tabs[0] || {};
     updatePopupWith(url);
   });

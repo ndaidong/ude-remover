@@ -1,26 +1,30 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var exec = require('child_process').execSync;
-var mkdirp = require('mkdirp').sync;
+const {
+  existsSync,
+  writeFileSync,
+  readFileSync,
+} = require('fs');
+const exec = require('child_process').execSync;
+const mkdirp = require('mkdirp').sync;
 
-var updateVersion = (file, version) => {
-  let manifest = fs.readFileSync(file, 'utf8');
+const updateVersion = (file, version) => {
+  let manifest = readFileSync(file, 'utf8');
   let json = JSON.parse(manifest);
   json.version = version;
-  return fs.writeFileSync(file, JSON.stringify(json), 'utf8');
+  return writeFileSync(file, JSON.stringify(json), 'utf8');
 };
 
-var release = () => {
+const release = () => {
   let releaseDir = 'releases';
 
-  if (!fs.existsSync(releaseDir)) {
+  if (!existsSync(releaseDir)) {
     mkdirp(releaseDir);
   }
 
   let {version} = require('../package');
   let dest = `${releaseDir}/v${version}`;
-  if (fs.existsSync(dest)) {
+  if (existsSync(dest)) {
     exec(`rm -rf ${dest}`);
   }
   exec(`cp -R src ${dest}`);

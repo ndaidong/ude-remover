@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener((request) => {
   let {
-    patterns
+    patterns,
   } = request;
   if (patterns) {
     patterns.map(remover.scan);

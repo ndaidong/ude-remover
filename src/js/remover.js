@@ -17,7 +17,6 @@
     }
   }
 })('remover', () => {
-
   let {queryAll} = realdom;
 
   let scan = (pattern) => {
@@ -27,6 +26,6 @@
   };
 
   return {
-    scan
+    scan,
   };
 });

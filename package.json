@@ -1,8 +1,8 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.3",
   "name": "ude-remover",
   "description": "To remove unwanted DOM elements from any webpage",
-  "homepage": "https://chrome.google.com/webstore/detail/fasttyping/dgibeimfinglbfgimhiffmflgimlfffl",
+  "homepage": "https://chrome.google.com/webstore/detail/uderemover/gphpnjjiapfpckfphngjngioigdbfogh",
   "repository": {
     "type": "git",
     "url": "https://github.com/ndaidong/ude-remover"
@@ -10,27 +10,21 @@
   "author": "@ndaidong",
   "main": "./index.js",
   "engines": {
-    "node": ">= 6.0"
+    "node": ">= 7.6"
   },
   "scripts": {
     "setup": "node scripts/setup",
     "lint": "eslint src/js scripts",
-    "nsp": "nsp check --output checkstyle",
-    "test": "npm run lint && npm run nsp",
+    "test": "npm run lint",
     "release": "npm test && node scripts/release",
     "reset": "node reset"
   },
-  "devDependencies": {
-    "eslint": "4.x.x",
-    "eslint-config-ggc": "1.x.x",
-    "mkdirp": "0.x.x",
-    "nsp": "2.x.x"
-  },
+  "devDependencies": {},
   "keywords": [
     "chrome",
     "offline",
     "extension",
-    "apps",
+    "cleaner",
     "remover",
     "tool",
     "util"
@@ -45,5 +39,10 @@
       "realdom": "https://raw.githubusercontent.com/ndaidong/realdom/master/dist/realdom.min.js"
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-goes": "^1.0.0",
+    "mkdirp": "^0.5.1"
+  }
 }
