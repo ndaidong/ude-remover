@@ -1,5 +1,5 @@
 {
-  "version": "0.0.3",
+  "version": "1.0.0",
   "name": "ude-remover",
   "description": "To remove unwanted DOM elements from any webpage",
   "homepage": "https://chrome.google.com/webstore/detail/uderemover/gphpnjjiapfpckfphngjngioigdbfogh",
@@ -13,13 +13,24 @@
     "node": ">= 7.6"
   },
   "scripts": {
-    "setup": "node scripts/setup",
+    "setup": "DEBUG=ude-remover:* node scripts/setup",
     "lint": "eslint src/js scripts",
     "test": "npm run lint",
-    "release": "npm test && node scripts/release",
+    "release": "DEBUG=ude-remover:* node scripts/release",
     "reset": "node reset"
   },
-  "devDependencies": {},
+  "dependencies": {},
+  "devDependencies": {
+    "bellajs": "^7.2.2",
+    "cheerio": "^1.0.0-rc.2",
+    "debug": "^3.1.0",
+    "eslint": "^5.3.0",
+    "eslint-config-goes": "^1.0.0",
+    "html-minifier": "^3.5.19",
+    "mkdirp": "^0.5.1",
+    "uglify-es": "^3.3.9",
+    "uglifycss": "0.0.29"
+  },
   "keywords": [
     "chrome",
     "offline",
@@ -39,10 +50,5 @@
       "realdom": "https://raw.githubusercontent.com/ndaidong/realdom/master/dist/realdom.min.js"
     }
   },
-  "license": "MIT",
-  "dependencies": {
-    "eslint": "^5.3.0",
-    "eslint-config-goes": "^1.0.0",
-    "mkdirp": "^0.5.1"
-  }
+  "license": "MIT"
 }
