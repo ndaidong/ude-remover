@@ -2,17 +2,24 @@
 
 const {
   existsSync,
-  writeFileSync,
-  readFileSync,
 } = require('fs');
-const exec = require('child_process').execSync;
+
+const {execSync} = require('child_process');
+
 const mkdirp = require('mkdirp').sync;
 
+const {
+  optimize,
+} = require('./optimizer');
+
+const readFile = require('./readFile');
+const writeFile = require('./writeFile');
+
 const updateVersion = (file, version) => {
-  let manifest = readFileSync(file, 'utf8');
+  let manifest = readFile(file);
   let json = JSON.parse(manifest);
   json.version = version;
-  return writeFileSync(file, JSON.stringify(json), 'utf8');
+  return writeFile(file, JSON.stringify(json), 'utf8');
 };
 
 const release = () => {
@@ -25,11 +32,17 @@ const release = () => {
   let {version} = require('../package');
   let dest = `${releaseDir}/v${version}`;
   if (existsSync(dest)) {
-    exec(`rm -rf ${dest}`);
+    execSync(`rm -rf ${dest}`);
   }
-  exec(`cp -R src ${dest}`);
+  let tmpDir = `${releaseDir}/temp`;
+  if (existsSync(tmpDir)) {
+    execSync(`rm -rf ${tmpDir}`);
+  }
+  execSync(`cp -R src ${tmpDir}`);
 
-  updateVersion(`${dest}/manifest.json`, version);
+  updateVersion(`${tmpDir}/manifest.json`, version);
+
+  optimize(tmpDir, dest);
 };
 
 release();
