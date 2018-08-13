@@ -1,23 +1,29 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var exec = require('child_process').execSync;
-var mkdirp = require('mkdirp').sync;
+const {
+  existsSync,
+} = require('fs');
+const exec = require('child_process').execSync;
+const mkdirp = require('mkdirp').sync;
 
-var download = (file) => {
+const {
+  info,
+} = require('./logger');
+
+const download = (file) => {
   let {
-    src, dest
+    src, dest,
   } = file;
-  console.log('Downloading %s ...', src);
+  info('Downloading %s ...', src);
   exec(`wget -O ${dest} ${src}`);
-  console.log('Downloaded %s', dest);
+  info('Downloaded %s', dest);
 };
 
-var setup = () => {
+const setup = () => {
   let {builder} = require('../package');
   let {vendorDir, css, javascript} = builder;
 
-  if (!fs.existsSync(vendorDir)) {
+  if (!existsSync(vendorDir)) {
     mkdirp(vendorDir);
   }
 
@@ -30,7 +36,7 @@ var setup = () => {
     if (css[k]) {
       cssFiles.push({
         src: css[k],
-        dest: `${cssDir}/${k}.css`
+        dest: `${cssDir}/${k}.css`,
       });
     }
   }
@@ -40,20 +46,20 @@ var setup = () => {
     if (javascript[k]) {
       jsFiles.push({
         src: javascript[k],
-        dest: `${jsDir}/${k}.js`
+        dest: `${jsDir}/${k}.js`,
       });
     }
   }
 
   if (cssFiles.length > 0) {
-    if (!fs.existsSync(cssDir)) {
+    if (!existsSync(cssDir)) {
       mkdirp(cssDir);
     }
     cssFiles.map(download);
   }
 
   if (jsFiles.length > 0) {
-    if (!fs.existsSync(jsDir)) {
+    if (!existsSync(jsDir)) {
       mkdirp(jsDir);
     }
     jsFiles.map(download);

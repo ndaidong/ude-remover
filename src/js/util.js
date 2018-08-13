@@ -17,18 +17,17 @@
     }
   }
 })('util', () => {
-
-  var getDomainFromURL = (url) => {
+  let getDomainFromURL = (url) => {
     let u = new URL(url);
     return u.hostname.replace('www.', '');
   };
 
-  var getPatternsByDomain = (domain) => {
+  let getPatternsByDomain = (domain) => {
     return store.load(domain);
   };
 
   return {
     getDomainFromURL,
-    getPatternsByDomain
+    getPatternsByDomain,
   };
 });
